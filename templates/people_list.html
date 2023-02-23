@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>People List</h1>
+  <ul>
+    {% for person in people %}
+      <li><a href="{% url 'people_detail' person.pk %}">{{ person.name }}</a></li>
+    {% empty %}
+      <li>No people found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

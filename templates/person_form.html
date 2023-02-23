@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{% if person %}Update{% else %}Create{% endif %} Person</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="{% if person %}{{ person.name }}{% endif %}" />
+    </div>
+    <div>
+      <label for="age">Age:</label>
+      <select name="age">
+        <option value="">Select an age variant</option>
+        {% for age_variant in age_variants %}
+          <option value="{{ age_variant.pk }}" {% if person and person.age_id == age_variant.pk %}selected{% endif %}>{{ age_variant.age_between }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="gender">Gender:</label>
+      <select name="gender">
+        <option value="">Select a gender variant</option>
+        {% for gender_variant in gender_variants %}
+          <option value="{{ gender_variant.pk }}" {% if person and person.gender_type_id == gender_variant.pk %}selected{% endif %}>{{ gender_variant.get_gender_display }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="place">Place:</label>
+      <select name="place">
+        <option value="">Select a place</option>
+        {% for place in places %}
+          <option value="{{ place.pk }}" {% if person and person.places_id == place.pk %}selected{% endif %}>{{ place.location }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="occupation">Occupation:</label>
+      <select name="occupation">
+        <option value="">Select an occupation</option>
+        {% for occupation in occupations %}
+          <option value="{{ occupation.pk }}" {% if person and person.occupation_type_id == occupation.pk %}selected{% endif %}>{{ occupation.occupation }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="image">Image:</label>
+      <input type="file" name="image" />
+    </div>
+    <div>
+      <button type="submit">{% if person %}Update{% else %}Create{% endif %}</button>
+    </div>
+  </form>
+{% endblock %}

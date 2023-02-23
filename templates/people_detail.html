@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ person.name }}</h1>
+  <img src="{{ person.image.url }}" alt="{{ person.name }}" />
+  <p>Age: {{ person.age }}</p>
+  <p>Gender: {{ person.gender_type }}</p>
+  <p>Place: {{ person.places }}</p>
+  <p>Occupation: {{ person.occupation_type }}</p>
+{% endblock %}
